@@ -161,7 +161,6 @@ public:
 	*	@brief	노래 정보 설정
 	*	@pre	none.
 	*	@post	노래 정보 설정
-	*	@param	inSongNumber	곡번호
 	*	@param	inSong	곡명
 	*	@param	inSinger	가수명
 	*	@param	inAlbum	앨범
@@ -297,6 +296,17 @@ public:
 			return false;
 	}
 	/**
+	*	@brief	곡명 간에 == 연산자 오버로딩
+	*	@param	data	해당 클래스의 곡명과 연산될 곡명
+	*/
+	bool operator== (string data)
+	{
+		if (song.find(data) != string::npos)
+			return true;
+		else
+			return false;
+	}
+	/**
 	*	@brief	뮤직클래스 간에 > 연산자 오버로딩
 	*	@param	obj	해당 클래스와 연산될 피연산자 클래스
 	*/
@@ -318,8 +328,18 @@ public:
 		else
 			return false;
 	}
-
+	/**
+	*	@brief	뮤직클래스의 ostream시 << 연산자 오버로딩
+	*	@param	out	ostream시 할 out 종류
+	*	@param	music	out과 연산될 피연산자 뮤직클래스
+	*/
 	friend void operator<<(ostream& out, MusicType& music);
+	/**
+	*	@brief	뮤직클래스의 ofstream시 << 연산자 오버로딩
+	*	@param	out	ofstream시 할 out 종류
+	*	@param	music	out과 연산될 피연산자 뮤직클래스
+	*/
+	friend void operator<<(ofstream& out, MusicType& music);
 protected:
 	string song;		///< 노래제목
 	string singer;		///< 가수
