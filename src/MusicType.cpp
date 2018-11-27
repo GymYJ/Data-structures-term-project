@@ -5,7 +5,6 @@ void MusicType::SetSongFromKB()
 {
 	cout << "\tSong   : ";
 	cin >> song;
-	PrimaryKey = song + singer;
 }
 
 
@@ -14,7 +13,6 @@ void MusicType::SetSingerFromKB()
 {
 	cout << "\tSinger : ";
 	cin >> singer;
-	PrimaryKey = song + singer;
 }
 
 
@@ -48,7 +46,6 @@ void MusicType::SetRecordFromKB()
 	SetAlbumFromKB();
 	SetGenreFromKB();
 	SetLyricsFromKB();
-	PrimaryKey = song + singer;
 }
 
 void operator<<(ostream& out, MusicType& music)

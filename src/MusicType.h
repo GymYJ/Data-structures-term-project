@@ -26,7 +26,6 @@ public:
 		singer = "";
 		album = "";
 		genre = "";
-		PrimaryKey = "";
 	}
 
 	/**
@@ -90,17 +89,6 @@ public:
 	}
 
 	/**
-	*	@brief	primary key 가져오기
-	*	@pre	primary key가 설정되있어야 함
-	*	@post	none.
-	*	@return	primary key
-	*/
-	string GetPrimaryKey()
-	{
-		return PrimaryKey;
-	}
-
-	/**
 	*	@brief	곡명 설정
 	*	@pre	none.
 	*	@post	곡명 설정
@@ -109,7 +97,6 @@ public:
 	void SetSong(string inSong)
 	{
 		song = inSong;
-		PrimaryKey = song + singer;
 	}
 
 	/**
@@ -121,7 +108,6 @@ public:
 	void SetSinger(string inSinger)
 	{
 		singer = inSinger;
-		PrimaryKey = song + singer;
 	}
 
 	/**
@@ -174,7 +160,6 @@ public:
 		SetAlbum(inAlbum);
 		SetGenre(inGenre);
 		SetLyrics(inLyrics);
-		PrimaryKey = song + singer;
 	}
 
 	/**
@@ -290,7 +275,7 @@ public:
 	*/
 	bool operator== (MusicType &obj)
 	{
-		if (PrimaryKey == obj.GetPrimaryKey())
+		if (song == obj.GetSong())
 			return true;
 		else
 			return false;
@@ -312,7 +297,7 @@ public:
 	*/
 	bool operator> (MusicType &obj)
 	{
-		if (PrimaryKey > obj.GetPrimaryKey())
+		if (song > obj.GetSong())
 			return true;
 		else
 			return false;
@@ -323,7 +308,7 @@ public:
 	*/
 	bool operator< (MusicType &obj)
 	{
-		if (PrimaryKey < obj.GetPrimaryKey())
+		if (song < obj.GetSong())
 			return true;
 		else
 			return false;
@@ -343,10 +328,11 @@ public:
 protected:
 	string song;		///< 노래제목
 	string singer;		///< 가수
+	string songwriter;		///< 작곡가
+	string lyricwriter;		///< 작사가
 	string album;		///< 앨범
 	string genre;		///< 장르
 	string lyrics;		///< 가사
-	string PrimaryKey;	///< primary key(노래제목+가수)
 };
 
 #endif	// _MusicType_H

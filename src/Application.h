@@ -42,6 +42,20 @@ public:
 	void Run();
 
 	/**
+	*	@brief	관리자계정 인터페이스
+	*	@pre	Run함수가 실행되어 있어야 됨.
+	*	@post	계정선택 창으로 돌아감
+	*/
+	void MasterMode();
+
+	/**
+	*	@brief	유저계정 드라이버
+	*	@pre	Run함수가 실행되어 있어야 됨.
+	*	@post	계정선택 창으로 돌아감
+	*/
+	void UserMode();
+
+	/**
 	*	@brief	명령어를 화면에 출력하고 키보드로 입력 받음
 	*	@pre	none.
 	*	@post	none.
@@ -74,6 +88,25 @@ public:
 	int ReplaceMusic();
 
 	/**
+	*	@brief	재생목록에서 Music 하나 재생
+	*	@pre	재생목록이 초기화 되어있어야 됨
+	*	@return	재생 했으면 1, 없어서 못했으면 0 리턴
+	*/
+	int playMusic(string inSong, string inArtist);
+
+	/**
+	*	@brief	재생목록에 Music 하나 추가
+	*	@return	추가 했으면 1, 못했으면 0 리턴
+	*/
+	int AddMusicToPlayList(string inSong, string inArtist);
+
+	/**
+	*	@brief	재생목록에서 Music 하나 삭제
+	*	@return	삭제 했으면 1, 없어서 못했으면 0 리턴
+	*/
+	int deleteMusicFromPlayList();
+
+	/**
 	*	@brief	리스트에서 곡명이 일치하는 모든 Music 정보 출력
 	*	@pre	none
 	*	@return	출력되었으면 1, 출력안되면 0 리턴
@@ -102,11 +135,25 @@ public:
 	int SearchByGenre();
 
 	/**
+	*	@brief	재생목록 출력
+	*	@pre	none.
+	*	@post	none.
+	*/
+	void DisplayPlayList();
+
+	/**
 	*	@brief	모든 Music 출력
 	*	@pre	none.
 	*	@post	none.
 	*/
 	void DisplayAllMusic();
+
+	/**
+	*	@brief	가장 많이 재생된 30곡 출력
+	*	@pre	none.
+	*	@post	none.
+	*/
+	void DisplayMostPlayList();
 
 	/**
 	*	@brief	리스트 내에 모든 Music 삭제
@@ -152,6 +199,7 @@ public:
 
 
 private:
+	int m_Command;			///< current command number.
 	ifstream m_InFile;		///< input file descriptor.
 	ofstream m_OutFile;		///< output file descriptor.
 	BinarySearchTree<MusicType> m_List;	///< Master list
@@ -159,7 +207,10 @@ private:
 	BinarySearchTree<GenreType> m_GenreList; ///< Genre list.
 	BinarySearchTree<ArtistType> m_ArtistList; ///< Artist list.
 	BinarySearchTree<AlbumType> m_AlbumList; ///< Album list.
-	int m_Command;			///< current command number.
+	SimpleMusicType* m_MostPlayList = new SimpleMusicType[30];	///< 가장 많이 재생한 곡 30개
+	SimpleMusicType* m_PlayList = new SimpleMusicType[30];		///< 재생 목록
+	int m_MostPlayListLength;		///< 가장 많이 재생한 곡 목록 길이
+	int m_PlayListLength;			///< 재생목록 길이
 };
 
 

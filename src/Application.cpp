@@ -6,6 +6,52 @@ void Application::Run()
 {
 	while (1)
 	{
+		int num; // 커맨드넘버
+		string input; // 잘못된 입력을 방지하기 위한 스트링 변수
+		cout << "┌────────────────────────────────────────┐" << endl;
+		cout << "│         1. 관리자 모드                 │" << endl;
+		cout << "│         2. 유저 모드                   │" << endl;
+		cout << "│         0. 종료                        │" << endl;
+		cout << "└────────────────────────────────────────┘" << endl << "-> ";
+		cin >> input;
+
+		try
+		{
+			num = stoi(input); // 숫자 이외의 값이 들어가면 오류
+			if (num <= -1 || num >= 3)
+			{
+				throw invalid_argument("숫자 범위 오류");
+			}
+		}
+		catch (invalid_argument)
+		{
+			cout << "잘못된 명령어 입니다." << endl;
+			system("pause");
+			cout << endl;
+			system("CLS");
+			continue;
+		}
+
+		switch (num)
+		{
+		case 1:	// 마스터 모드로 이동
+			system("CLS");
+			MasterMode();
+			break;
+		case 2:	// 유저 모드로 이동
+			system("CLS");
+			UserMode();
+			break;
+		case 0:
+			cout << "프로그램을 종료합니다." << endl;
+			//exit(100);
+			return;
+		default:
+			break;
+		}
+	}
+	while (1)
+	{
 		m_Command = GetCommand();
 
 		switch (m_Command)
@@ -56,6 +102,169 @@ void Application::Run()
 	}
 }
 
+// 마스터계정 모드
+void Application::MasterMode()
+{
+	while (1)
+	{
+		int num; // 커맨드넘버
+		string input; // 잘못된 입력을 방지하기 위한 스트링 변수
+		cout << "┌────────────────────────────────────────┐" << endl;
+		cout << "│         1. 음악 추가                   │" << endl;
+		cout << "│         2. 음악 삭제                   │" << endl;
+		cout << "│         3. 음악 갱신                   │" << endl;
+		cout << "│         4. 모든 음악 정보 출력         │" << endl;
+		cout << "│         5. 파일 로드                   │" << endl;
+		cout << "│         6. 파일 저장                   │" << endl;
+		cout << "│         0. 이전 메뉴로                 │" << endl;
+		cout << "└────────────────────────────────────────┘" << endl << "-> ";
+		cin >> input;
+
+		try
+		{
+			num = stoi(input); // 숫자 이외의 값이 들어가면 오류
+			if (num <= -1 || num >= 12)
+			{
+				throw invalid_argument("숫자 범위 오류");
+			}
+		}
+		catch (invalid_argument)
+		{
+			cout << "잘못된 명령어 입니다." << endl;
+			system("pause");
+			cout << endl;
+			system("CLS");
+			continue;
+		}
+
+		switch (num)
+		{
+		case 1:	// 음악 추가 – 정렬
+			AddMusic();
+			system("pause");
+			cout << endl;
+			system("CLS");
+			break;
+		case 2:	// 리스트에서 음악 삭제
+			DeleteMusic();
+			system("pause");
+			cout << endl;
+			system("CLS");
+			break;
+		case 3:	// 리스트에 있는 음악 갱신 – 딜리트하고 애드
+			ReplaceMusic();
+			system("pause");
+			cout << endl;
+			system("CLS");
+			break;
+		case 4:	// primary key로 리스트에 있는 음악 검색
+			DisplayAllMusic();
+			system("pause");
+			cout << endl;
+			system("CLS");
+			break;
+		case 5:	// 곡명으로 리스트에 있는 음악 검색
+			ReadDataFromFile();
+			system("pause");
+			cout << endl;
+			system("CLS");
+			break;
+		case 6:	// 가수명으로 리스트에 있는 음악 검색
+			WriteDataToFile();
+			system("pause");
+			cout << endl;
+			system("CLS");
+			break;
+		case 0:	// 이전 메뉴로
+			system("CLS");
+			return;
+		default:
+			break;
+		}
+	}
+}
+
+// 유저계정 모드
+void Application::UserMode()
+{
+	while (1)
+	{
+		int num; // 커맨드넘버
+		string input; // 잘못된 입력을 방지하기 위한 스트링 변수
+		cout << "┌────────────────────────────────────────┐" << endl;
+		cout << "│     1. 재생 목록 출력                  │" << endl;
+		cout << "│     2. 재생 목록에서 음악 삭제         │" << endl;
+		cout << "│     3. 곡명으로 음악 검색              │" << endl;
+		cout << "│     4. 가수명으로 음악 검색            │" << endl;
+		cout << "│     5. 앨범명으로 음악 검색            │" << endl;
+		cout << "│     6. 가장 많이 재생한 30곡 목록 출력 │" << endl;
+		cout << "│     0. 이전 메뉴로                     │" << endl;
+		cout << "└────────────────────────────────────────┘" << endl << "-> ";
+		cin >> input;
+
+		try
+		{
+			num = stoi(input); // 숫자 이외의 값이 들어가면 오류
+			if (num <= -1 || num >= 12)
+			{
+				throw invalid_argument("숫자 범위 오류");
+			}
+		}
+		catch (invalid_argument)
+		{
+			cout << "잘못된 명령어 입니다." << endl;
+			system("pause");
+			cout << endl;
+			system("CLS");
+			continue;
+		}
+
+		switch (num)
+		{
+		case 1:	// 재생 목록 출력
+			DisplayPlayList();
+			system("pause");
+			cout << endl;
+			system("CLS");
+			break;
+		case 2:	// 재생 목록에서 음악 삭제
+			deleteMusicFromPlayList();
+			system("pause");
+			cout << endl;
+			system("CLS");
+			break;
+		case 3:	// primary key로 리스트에 있는 음악 검색
+			SearchByName();
+			system("pause");
+			cout << endl;
+			system("CLS");
+			break;
+		case 4:	// 곡명으로 리스트에 있는 음악 검색
+			SearchByArtist();
+			system("pause");
+			cout << endl;
+			system("CLS");
+			break;
+		case 5:	// 가수명으로 리스트에 있는 음악 검색
+			SearchByAlbum();
+			system("pause");
+			cout << endl;
+			system("CLS");
+			break;
+		case 6:	// 작곡자명으로 리스트에 있는 음악 검색
+			DisplayMostPlayList();
+			system("pause");
+			cout << endl;
+			system("CLS");
+			break;
+		case 0:	// 이전 메뉴로
+			system("CLS");
+			return;
+		default:
+			break;
+		}
+	}
+}
 
 // 명령어를 스크린에 보여주고 키보드로 입력받음
 int Application::GetCommand()
@@ -288,6 +497,25 @@ int Application::ReplaceMusic()
 	return 0;
 }
 
+
+int Application::playMusic(string inSong, string inArtist)
+{
+	
+	return 1;
+}
+
+int Application::AddMusicToPlayList(string inSong, string inArtist)
+{
+	
+	return 1;
+}
+
+int Application::deleteMusicFromPlayList()
+{
+	
+	return 1;
+}
+
 // 리스트에서 제목이 일치하는 Music 모두 출력
 int Application::SearchByName()
 {
@@ -361,6 +589,50 @@ int Application::SearchByGenre()
 	return 1;
 }
 
+// 재생목록 출력
+void Application::DisplayPlayList()
+{
+	if (m_PlayListLength == 0)
+	{
+		cout << "재생목록이 비어있습니다." << endl;
+		return;
+	}
+	cout << "──────────────────────────────────────────" << endl;
+	cout << "                재생목록" << endl;
+	// list의 모든 데이터를 화면에 출력
+	for (int i = 0; i < m_PlayListLength; i++)
+	{
+		cout << "──────────────────────────────────────────" << endl;
+		cout << "No. " << (i + 1) << endl;
+		m_PlayList[i].DisplayRecordOnScreen();
+	}
+	cout << "──────────────────────────────────────────" << endl;
+
+	int num; // 커맨드넘버
+	string input; // 잘못된 입력을 방지하기 위한 스트링 변수
+	cout << "재생할 곡의 번호를 선택해주세요." << endl;
+	cout << "Number : ";
+	cin >> input;
+
+	try
+	{
+		num = stoi(input); // 숫자 이외의 값이 들어가면 오류
+		if (num <= 0 || num > m_PlayListLength)
+		{
+			throw invalid_argument("숫자 범위 오류");
+		}
+	}
+	catch (invalid_argument)
+	{
+		cout << "잘못된 명령어 입니다." << endl;
+		return;
+	}
+
+	playMusic(m_PlayList[num - 1].GetSong(), m_PlayList[num - 1].GetSinger());
+
+	return;
+}
+
 // 리스트에 있는 Music 전부 삭제
 int Application::MakeEmpty()
 {
@@ -372,6 +644,12 @@ int Application::MakeEmpty()
 void Application::DisplayAllMusic()
 {
 	m_List.PrintTree(cout);
+}
+
+// 가장 많이 재생한 30곡 출력
+void Application::DisplayMostPlayList()
+{
+	
 }
 
 

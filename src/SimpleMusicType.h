@@ -41,16 +41,6 @@ public:
 		return singer;
 	}
 
-	/**
-	*	@brief	primary key 가져오기
-	*	@pre	primary key가 설정되있어야 함
-	*	@post	none.
-	*	@return	primary key
-	*/
-	string GetPrimaryKey()
-	{
-		return PrimaryKey;
-	}
 
 	/**
 	*	@brief	곡명 설정
@@ -61,7 +51,6 @@ public:
 	void SetSong(string inSong)
 	{
 		song = inSong;
-		PrimaryKey = song + singer;
 	}
 
 	/**
@@ -73,7 +62,6 @@ public:
 	void SetSinger(string inSinger)
 	{
 		singer = inSinger;
-		PrimaryKey = song + singer;
 	}
 
 	/**
@@ -87,7 +75,6 @@ public:
 	{
 		SetSong(inSong);
 		SetSinger(inSinger);
-		PrimaryKey = song + singer;
 	}
 
 	/**
@@ -129,7 +116,7 @@ public:
 	*/
 	bool operator== (SimpleMusicType &obj)
 	{
-		if (PrimaryKey == obj.GetPrimaryKey())
+		if (song == obj.GetSong())
 			return true;
 		else
 			return false;
@@ -140,7 +127,7 @@ public:
 	*/
 	bool operator> (SimpleMusicType &obj)
 	{
-		if (PrimaryKey > obj.GetPrimaryKey())
+		if (song > obj.GetSong())
 			return true;
 		else
 			return false;
@@ -151,7 +138,7 @@ public:
 	*/
 	bool operator< (SimpleMusicType &obj)
 	{
-		if (PrimaryKey < obj.GetPrimaryKey())
+		if (song < obj.GetSong())
 			return true;
 		else
 			return false;
@@ -165,7 +152,6 @@ public:
 private:
 	string song;
 	string singer;
-	string PrimaryKey;	///< primary key(노래제목+가수)
 };
 
 #endif	// _SimpleMusicType_H
