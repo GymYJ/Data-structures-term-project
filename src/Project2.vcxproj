@@ -131,7 +131,6 @@
     <ClInclude Include="GenreType.h" />
     <ClInclude Include="MusicType.h" />
     <ClInclude Include="SimpleMusicType.h" />
-    <ClInclude Include="SortedLinkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -12,7 +12,7 @@ using namespace std;
 #include "AlbumType.h"
 #include "BinarySearchTree.h"
 /**
-*	@brief	아티스트타입 클래스
+*	@brief	SimpleMusicType으로 된 리스트를 가진 아티스트타입 클래스
 */
 class ArtistType
 {

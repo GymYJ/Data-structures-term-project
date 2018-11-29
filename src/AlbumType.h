@@ -11,7 +11,7 @@ using namespace std;
 #include "BinarySearchTree.h"
 #include "SimpleMusicType.h"
 /**
-*	@brief	앨범타입 클래스
+*	@brief	SimpleMusicType으로 된 리스트를 가진 앨범타입 클래스
 */
 class AlbumType
 {

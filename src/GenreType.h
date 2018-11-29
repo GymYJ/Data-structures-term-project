@@ -13,7 +13,7 @@ using namespace std;
 #include "SimpleMusicType.h"
 
 /**
-*	@brief	SimpleMusic을 멤버변수로 갖는 장르타입 클래스
+*	@brief	SimpleMusicType으로 된 리스트를 가진 장르타입 클래스
 */
 class GenreType
 {
@@ -50,7 +50,7 @@ public:
 	*/
 	void DisplayGenreOnScreen()
 	{
-		cout << "\tGenre  : " << genre << endl;
+		cout << "\t장르      : " << genre << endl;
 	};
 
 	/**

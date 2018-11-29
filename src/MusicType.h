@@ -9,10 +9,8 @@
 
 using namespace std;
 
-
-
 /**
-*	@brief	Music 정보 클래스
+*	@brief	음악 정보 클래스
 */
 class MusicType
 {
@@ -53,6 +51,28 @@ public:
 	string GetSinger()
 	{
 		return singer;
+	}
+
+	/**
+	*	@brief	작곡가 가져오기
+	*	@pre	작곡가가 설정되있어야 함
+	*	@post	none.
+	*	@return	작곡가
+	*/
+	string GetSongWriter()
+	{
+		return songwriter;
+	}
+
+	/**
+	*	@brief	작사가 가져오기
+	*	@pre	작사가가 설정되있어야 함
+	*	@post	none.
+	*	@return	작사가
+	*/
+	string GetLyricWriter()
+	{
+		return lyricwriter;
 	}
 
 	/**
@@ -111,6 +131,28 @@ public:
 	}
 
 	/**
+	*	@brief	작곡가 설정
+	*	@pre	none.
+	*	@post	작곡가 설정
+	*	@param	inSongWriter	설정할 작곡가
+	*/
+	void SetSongWriter(string inSongWriter)
+	{
+		songwriter = inSongWriter;
+	}
+
+	/**
+	*	@brief	작사가 설정
+	*	@pre	none.
+	*	@post	작사가 설정
+	*	@param	inLyricWriter	설정할 작사가
+	*/
+	void SetLyricWriter(string inLyricWriter)
+	{
+		lyricwriter = inLyricWriter;
+	}
+
+	/**
 	*	@brief	앨범 설정
 	*	@pre	none.
 	*	@post	앨범 설정
@@ -149,14 +191,18 @@ public:
 	*	@post	노래 정보 설정
 	*	@param	inSong	곡명
 	*	@param	inSinger	가수명
+	*	@param	inSongWriter	설정할 작곡가
+	*	@param	inLyricWriter	설정할 작사가
 	*	@param	inAlbum	앨범
 	*	@param	inGenre	장르
 	*	@param	inLyrics	가사
 	*/
-	void SetRecord(string inSong, string inSinger, string inAlbum, string inGenre, string inLyrics)
+	void SetRecord(string inSong, string inSinger, string inSongWriter, string inLyricWriter, string inAlbum, string inGenre, string inLyrics)
 	{
 		SetSong(inSong);
 		SetSinger(inSinger);
+		SetSongWriter(inSongWriter);
+		SetLyricWriter(inLyricWriter);
 		SetAlbum(inAlbum);
 		SetGenre(inGenre);
 		SetLyrics(inLyrics);
@@ -169,7 +215,7 @@ public:
 	*/
 	void DisplaySongOnScreen()
 	{
-		cout << "\tSong   : " << song << endl;
+		cout << "\t곡명      : " << song << endl;
 	};
 
 	/**
@@ -179,7 +225,27 @@ public:
 	*/
 	void DisplaySingerOnScreen()
 	{
-		cout << "\tSinger : " << singer << endl;
+		cout << "\t가수명    : " << singer << endl;
+	};
+
+	/**
+	*	@brief	화면에 작곡가 출력
+	*	@pre	작곡가가 설정되있어야 함
+	*	@post	none
+	*/
+	void DisplaySongWriterOnScreen()
+	{
+		cout << "\t작곡가    : " << songwriter << endl;
+	};
+
+	/**
+	*	@brief	화면에 작사가 출력
+	*	@pre	작사가가 설정되있어야 함
+	*	@post	none
+	*/
+	void DisplayLyricWriterOnScreen()
+	{
+		cout << "\t작사가    : " << lyricwriter << endl;
 	};
 
 	/**
@@ -189,7 +255,7 @@ public:
 	*/
 	void DisplayAlbumOnScreen()
 	{
-		cout << "\tAlbum  : " << album << endl;
+		cout << "\t앨범명    : " << album << endl;
 	};
 
 	/**
@@ -199,7 +265,7 @@ public:
 	*/
 	void DisplayGenreOnScreen()
 	{
-		cout << "\tGenre  : " << genre << endl;
+		cout << "\t장르      : " << genre << endl;
 	};
 
 	/**
@@ -209,7 +275,7 @@ public:
 	*/
 	void DisplayLyricsOnScreen()
 	{
-		cout << "\tLyrics : " << lyrics << endl;
+		cout << "\t가사      : " << lyrics << endl;
 	};
 
 	/**
@@ -221,6 +287,8 @@ public:
 	{
 		DisplaySongOnScreen();
 		DisplaySingerOnScreen();
+		DisplaySongWriterOnScreen();
+		DisplayLyricWriterOnScreen();
 		DisplayAlbumOnScreen();
 		DisplayGenreOnScreen();
 		DisplayLyricsOnScreen();
@@ -239,6 +307,20 @@ public:
 	*	@post	가수명 설정
 	*/
 	void SetSingerFromKB();
+
+	/**
+	*	@brief	키보드로 작곡가 설정
+	*	@pre	none.
+	*	@post	작곡가 설정
+	*/
+	void SetSongWriterFromKB();
+
+	/**
+	*	@brief	키보드로 작사가 설정
+	*	@pre	none.
+	*	@post	작사가 설정
+	*/
+	void SetLyricWriterFromKB();
 
 	/**
 	*	@brief	키보드로 앨범 설정
@@ -314,11 +396,11 @@ public:
 	*	@param	music	out과 연산될 피연산자 뮤직클래스
 	*/
 	friend void operator<<(ofstream& out, MusicType& music);
-protected:
+private:
 	string song;		///< 노래제목(primary key)
 	string singer;		///< 가수
-	string songwriter;		///< 작곡가
-	string lyricwriter;		///< 작사가
+	string songwriter;	///< 작곡가
+	string lyricwriter;	///< 작사가
 	string album;		///< 앨범
 	string genre;		///< 장르
 	string lyrics;		///< 가사

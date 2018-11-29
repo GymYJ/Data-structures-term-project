@@ -12,7 +12,7 @@
 #include <io.h>
 
 #pragma comment(lib, "winmm.lib")
-#define dir "C:\\Users\\Yujin\\Music\\음악\\"
+#define dir "..\\doc\\MusicSample\\"
 using namespace std;
 
 #include "MusicType.h"
@@ -23,7 +23,7 @@ using namespace std;
 #define FILENAMESIZE 1024
 
 /**
-*	@brief	Music 관리를 쉽게 하기 위한 application 클래스
+*	@brief	음악 관리를 쉽게 하기 위한 어플리케이션 클래스
 */
 class Application
 {
@@ -89,12 +89,14 @@ public:
 	/**
 	*	@brief	재생목록에서 Music 하나 재생
 	*	@pre	재생목록이 초기화 되어있어야 됨
-	*	@return	재생 했으면 1, 없어서 못했으면 0 리턴
+	*	@post	음악이 재생되고 곡마다 재생된 횟수만큼 재생횟수가 증가
+	*	@param	inNumber	재생할 곡의 리스트 내 순서
 	*/
-	int playMusic(string inSong);
+	void playMusic(int inNumber);
 
 	/**
 	*	@brief	재생목록에 Music 하나 추가
+	*	@param	inSong	재생목록에 추가할 곡의 곡명
 	*	@return	추가 했으면 1, 못했으면 0 리턴
 	*/
 	int AddMusicToPlayList(string inSong);
@@ -104,6 +106,14 @@ public:
 	*	@return	삭제 했으면 1, 없어서 못했으면 0 리턴
 	*/
 	int deleteMusicFromPlayList();
+
+	/**
+	*	@brief	재생목록에서 Music 찾기
+	*	@pre	재생목록이 초기화 되어있어야 됨
+	*	@param	inData	재생목록에서 찾는 곡의 곡명
+	*	@return	찾으면 해당 곡의 순서, 없어서 못찾았으면 -1 리턴
+	*/
+	int GetSeqNumOfPlayList(SimpleMusicType inData);
 
 	/**
 	*	@brief	리스트에서 곡명이 일치하는 모든 Music 정보 출력
@@ -201,13 +211,13 @@ private:
 	int m_Command;			///< current command number.
 	ifstream m_InFile;		///< input file descriptor.
 	ofstream m_OutFile;		///< output file descriptor.
-	BinarySearchTree<MusicType> m_List;	///< Master list
-	BinarySearchTree<SimpleMusicType> m_SongList; ///< Song list.
+	BinarySearchTree<MusicType> m_SongList;	///< Master list
+	BinarySearchTree<SimpleMusicType> m_SimpleList; ///< Song list.
 	BinarySearchTree<GenreType> m_GenreList; ///< Genre list.
 	BinarySearchTree<ArtistType> m_ArtistList; ///< Artist list.
 	BinarySearchTree<AlbumType> m_AlbumList; ///< Album list.
 	SimpleMusicType* m_MostPlayList = new SimpleMusicType[30];	///< 가장 많이 재생한 곡 30개
-	SimpleMusicType* m_PlayList = new SimpleMusicType[30];		///< 재생 목록
+	SimpleMusicType* m_PlayList = new SimpleMusicType[100];		///< 재생 목록
 	int m_MostPlayListLength;		///< 가장 많이 재생한 곡 목록 길이
 	int m_PlayListLength;			///< 재생목록 길이
 };

@@ -11,13 +11,19 @@
 using namespace std;
 
 /**
-*	@brief	SimpleMusic 정보 클래스
+*	@brief	간단한 음악 정보 클래스
 */
 class SimpleMusicType
 {
 public:
 	SimpleMusicType();
 	~SimpleMusicType();
+
+	/**
+	*	@brief	재생횟수 증가
+	*	@post	재생횟수가 1 증가함
+	*/
+	void AddNumberOfPlay();	// 재생횟수 추가
 
 	/**
 	*	@brief	곡명 가져오기
@@ -41,6 +47,15 @@ public:
 		return singer;
 	}
 
+	/**
+	*	@brief	재생횟수 가져오기
+	*	@pre	재생횟수가 설정되있어야함
+	*	@return	재생횟수
+	*/
+	int GetNumberOfPlay()	// 재생횟수 가져오기
+	{
+		return numberofplay;
+	}
 
 	/**
 	*	@brief	곡명 설정
@@ -84,7 +99,7 @@ public:
 	*/
 	void DisplaySongOnScreen()
 	{
-		cout << "\tSong   : " << song << endl;
+		cout << "\t곡명      : " << song << endl;
 	};
 
 	/**
@@ -94,7 +109,17 @@ public:
 	*/
 	void DisplaySingerOnScreen()
 	{
-		cout << "\tSinger   : " << singer << endl;
+		cout << "\t가수명    : " << singer << endl;
+	};
+
+	/**
+	*	@brief	화면에 재생횟수 출력
+	*	@pre	재생횟수가 설정되있어야 함
+	*	@post	none
+	*/
+	void DisplayNumberOfPlayOnScreen()
+	{
+		cout << "\t재생횟수  : " << numberofplay << endl;
 	};
 
 	/**

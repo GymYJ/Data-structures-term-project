@@ -14,6 +14,11 @@ SimpleMusicType::~SimpleMusicType()
 {
 }
 
+void SimpleMusicType::AddNumberOfPlay()
+{
+	numberofplay++;
+}
+
 void operator<<(ostream& out, SimpleMusicType& simplemusic)
 {
 	out << "\t°î¸í   : " << simplemusic.song << endl;
