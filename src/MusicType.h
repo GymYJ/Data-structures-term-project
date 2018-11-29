@@ -281,17 +281,6 @@ public:
 			return false;
 	}
 	/**
-	*	@brief	곡명 간에 == 연산자 오버로딩
-	*	@param	data	해당 클래스의 곡명과 연산될 곡명
-	*/
-	bool operator== (string data)
-	{
-		if (song.find(data) != string::npos)
-			return true;
-		else
-			return false;
-	}
-	/**
 	*	@brief	뮤직클래스 간에 > 연산자 오버로딩
 	*	@param	obj	해당 클래스와 연산될 피연산자 클래스
 	*/
@@ -326,7 +315,7 @@ public:
 	*/
 	friend void operator<<(ofstream& out, MusicType& music);
 protected:
-	string song;		///< 노래제목
+	string song;		///< 노래제목(primary key)
 	string singer;		///< 가수
 	string songwriter;		///< 작곡가
 	string lyricwriter;		///< 작사가

@@ -112,9 +112,9 @@ public:
 	}
 
 private:
-	string ArtistName;	/// 가수명
-	BinarySearchTree<SimpleMusicType> m_List;	/// 노래목록
-	int m_Length;	/// 앨범 개수
+	string ArtistName;	///< 가수명(primary key)
+	BinarySearchTree<SimpleMusicType> m_List;	///< 노래목록
+	int m_Length;	///< 앨범 개수
 };
 
 #endif	// _ArtistType_H

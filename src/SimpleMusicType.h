@@ -150,8 +150,9 @@ public:
 	*/
 	friend void operator<<(ostream& out, SimpleMusicType& simplemusic);
 private:
-	string song;
-	string singer;
+	string song;	///< °î¸í(primary key)
+	string singer;	///< °¡¼ö
+	int numberofplay;	///< Àç»ýÈ½¼ö
 };
 
 #endif	// _SimpleMusicType_H

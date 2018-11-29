@@ -54,12 +54,6 @@ public:
 	*	@return	수록곡 수
 	*/
 	int GetNumberOfContainMusic();	// 수록곡 수 가져오기
-	/**
-	*	@brief	primary key 가져오기
-	*	@pre	primary key가 설정되있어야함
-	*	@return	primary key
-	*/
-	string GetPrimaryKey();	// Primary key 가져오기
 
 	/**
 	*	@brief	가수명 설정하기
@@ -117,18 +111,7 @@ public:
 	*/
 	bool operator== (AlbumType &obj)
 	{
-		if (PrimaryKey.compare(obj.GetPrimaryKey()) == 0)
-			return true;
-		else
-			return false;
-	}
-	/**
-	*	@brief	앨범명 간에 == 연산자 오버로딩
-	*	@param	data	해당 클래스의 앨범명과 연산될 앨범명
-	*/
-	bool operator== (string data)
-	{
-		if (AlbumName.find(data) != string::npos)
+		if (AlbumName == obj.GetAlbumName())
 			return true;
 		else
 			return false;
@@ -139,7 +122,7 @@ public:
 	*/
 	bool operator> (AlbumType &obj)
 	{
-		if (PrimaryKey.compare(obj.GetPrimaryKey()) == 1)
+		if (AlbumName > obj.GetAlbumName())
 			return true;
 		else
 			return false;
@@ -150,7 +133,7 @@ public:
 	*/
 	bool operator< (AlbumType &obj)
 	{
-		if (PrimaryKey.compare(obj.GetPrimaryKey()) == -1)
+		if (AlbumName < obj.GetAlbumName())
 			return true;
 		else
 			return false;
@@ -162,11 +145,10 @@ public:
 	*/
 	friend void operator<<(ostream& out, AlbumType& album);
 private:
-	string ArtistName;	/// 가수명
-	string AlbumName;	/// 앨범명
-	BinarySearchTree<SimpleMusicType> m_List; 	/// 수록곡리스트
-	int m_Length;	/// 수록곡 수
-	string PrimaryKey;	/// primary key (가수명+앨범명)
+	string AlbumName;	///< 앨범명(primary key)
+	string ArtistName;	///< 가수명
+	BinarySearchTree<SimpleMusicType> m_List; 	///< 수록곡리스트
+	int m_Length;	///< 수록곡 수
 };
 
 #endif	// _AlbumType_H

@@ -6,6 +6,7 @@ SimpleMusicType::SimpleMusicType()
 {
 	song = "";
 	singer = "";
+	numberofplay = 0;
 }
 
 
@@ -15,6 +16,6 @@ SimpleMusicType::~SimpleMusicType()
 
 void operator<<(ostream& out, SimpleMusicType& simplemusic)
 {
-	out << "\tSong   : " << simplemusic.song << endl;
-	out << "\tSinger : " << simplemusic.singer << endl;
+	out << "\t°î¸í   : " << simplemusic.song << endl;
+	out << "\t°¡¼ö¸í : " << simplemusic.singer << endl;
 }

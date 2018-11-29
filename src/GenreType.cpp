@@ -21,8 +21,8 @@ int GenreType::GetLength()
 // 장르별로 SimpleMusic 출력
 void GenreType::DisplayListOnScreen()
 {
-	cout << "\tGenre  : " << genre << endl;
-	cout << "------------------------------------------" << endl;
+	cout << "\t장르      : " << genre << endl;
+	cout << "──────────────────────────────────────────" << endl;
 	m_List.PrintTree(cout);
 }
 

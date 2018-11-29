@@ -39,43 +39,35 @@ int AlbumType::GetNumberOfContainMusic()	// 수록곡 수 가져오기
 	return m_Length;
 }
 
-string AlbumType::GetPrimaryKey() // Primary key 가져오기
-{
-	return PrimaryKey;
-}
-
 void AlbumType::SetArtistName(string inArtistName)	// 가수명 설정 + primary key 설정
 {
 	ArtistName = inArtistName;
-	PrimaryKey = ArtistName + AlbumName;
 }
 
 void AlbumType::SetAlbumName(string inAlbumName)		// 앨범명 설정 + primary key 설정
 {
 	AlbumName = inAlbumName;
-	PrimaryKey = ArtistName + AlbumName;
 }
 
 void AlbumType::SetRecord(string inArtistName, string inAlbumName)	// 모든 레코드 설정
 {
 	ArtistName = inArtistName;
 	AlbumName = inAlbumName;
-	PrimaryKey = ArtistName + AlbumName;
 }
 
 void AlbumType::DisplayArtistNameOnScreen()	// 화면에 가수명 출력
 {
-	cout << "\tArtistName : " << ArtistName << endl;
+	cout << "\t가수명    : " << ArtistName << endl;
 }
 
 void AlbumType::DisplayAlbumNameOnScreen()	// 화면에 앨범명 출력
 {
-	cout << "\tAlbumName : " << AlbumName << endl;
+	cout << "\t앨범명    : " << AlbumName << endl;
 }
 
 void AlbumType::DisplayNumberOfContainMusicOnScreen()	// 화면에 수록곡 수 출력
 {
-	cout << "\tNumberOfContainMusic : " << m_Length << endl;
+	cout << "\t수록곡 수 : " << m_Length << endl;
 }
 
 void AlbumType::DisplayContainMusicListOnScreen()		// 화면에 수록곡리스트 출력
@@ -83,7 +75,7 @@ void AlbumType::DisplayContainMusicListOnScreen()		// 화면에 수록곡리스트 출력
 	DisplayArtistNameOnScreen();
 	DisplayAlbumNameOnScreen();
 	DisplayNumberOfContainMusicOnScreen();
-	cout << "------------------------------------------" << endl;
+	cout << "──────────────────────────────────────────" << endl;
 	m_List.PrintTree(cout);
 }
 
@@ -96,7 +88,7 @@ void AlbumType::DisplayRecordOnScreen()		// 화면에 모든 레코드 출력
 
 void operator<<(ostream& out, AlbumType& album)
 {
-	out << "\tArtistName : " << album.ArtistName << endl;
-	out << "\tAlbumName : " << album.AlbumName << endl;
-	out << "\tNumberOfContainMusic : " << album.m_Length << endl;
+	out << "\t가수명    : " << album.ArtistName << endl;
+	out << "\t앨범명    : " << album.AlbumName << endl;
+	out << "\t수록곡 수 : " << album.m_Length << endl;
 }

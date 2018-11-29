@@ -46,12 +46,12 @@ void ArtistType::SetRecord(string inArtistName)	// 가수명 설정
 
 void ArtistType::DisplayArtistNameOnScreen()		// 화면에 가수명 출력
 {
-	cout << "\tArtistName : " << ArtistName << endl;
+	cout << "\t가수명    : " << ArtistName << endl;
 }
 
 void ArtistType::DisplaySongListOnScreen()		// 화면에 앨범리스트 출력
 {
 	DisplayArtistNameOnScreen();
-	cout << "------------------------------------------" << endl;
+	cout << "──────────────────────────────────────────" << endl;
 	m_List.PrintTree(cout);
 }

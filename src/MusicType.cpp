@@ -3,7 +3,7 @@
 // 키보드로 곡명 설정
 void MusicType::SetSongFromKB()
 {
-	cout << "\tSong   : ";
+	cout << "\t곡명      : ";
 	cin >> song;
 }
 
@@ -11,7 +11,7 @@ void MusicType::SetSongFromKB()
 // 키보드로 가수명 설정
 void MusicType::SetSingerFromKB()
 {
-	cout << "\tSinger : ";
+	cout << "\t가수명    : ";
 	cin >> singer;
 }
 
@@ -19,21 +19,21 @@ void MusicType::SetSingerFromKB()
 // 키보드로 앨범 설정
 void MusicType::SetAlbumFromKB()
 {
-	cout << "\tAlbum  : ";
+	cout << "\t앨범명    : ";
 	cin >> album;
 }
 
 // 키보드로 장르 설정
 void MusicType::SetGenreFromKB()
 {
-	cout << "\tGenre  : ";
+	cout << "\t장르      : ";
 	cin >> genre;
 }
 
 // 키보드로 가사 설정
 void MusicType::SetLyricsFromKB()
 {
-	cout << "\tLyrics : ";
+	cout << "\t가사      : ";
 	getline(cin, lyrics, '\n');
 	getline(cin, lyrics, '\n');
 }
@@ -50,11 +50,11 @@ void MusicType::SetRecordFromKB()
 
 void operator<<(ostream& out, MusicType& music)
 {
-	out << "\tSong   : " << music.song << endl;
-	out << "\tSinger : " << music.singer << endl;
-	out << "\tAlbum  : " << music.album << endl;
-	out << "\tGenre  : " << music.genre << endl;
-	out << "\tLyrics : " << music.lyrics << endl;
+	out << "\t곡명      : " << music.song << endl;
+	out << "\t가수명    : " << music.singer << endl;
+	out << "\t앨범명    : " << music.album << endl;
+	out << "\t장르      : " << music.genre << endl;
+	out << "\t가사      : " << music.lyrics << endl;
 }
 
 void operator<<(ofstream& out, MusicType& music)

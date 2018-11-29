@@ -95,14 +95,6 @@ public:
 	void RetrieveItem(T& item, bool &found)const;
 
 	/**
-	*	@brief	입력한 값과 일치하는 값이 있는 노드를 Tree에서 검색함
-	*	@pre	찾고자 하는 item과 검색결과에 대한 found 설정
-	*	@post	일치하는 모든 노드값을 출력
-	*	@param	data	찾고자 하는 단어
-	*/
-	void RetrieveByString(string data);
-
-	/**
 	*	@brief	Tree의 node를 스크린에 출력한다.
 	*	@pre	none
 	*	@post	스크린에 Tree가 InOrder, PreOrder, PostOrder 방법으로 각각 출력됨.
@@ -207,17 +199,11 @@ void BinarySearchTree<T>::RetrieveItem(T& item, bool &found)const
 	Retrieve(root, item, found);		// Tree 검색 함수 호출
 }
 
-template<typename T>
-void BinarySearchTree<T>::RetrieveByString(string data)
-{
-	RetrieveString(root, data);
-}
-
 // Tree의 node를 각각의 방법대로 출력함
 template<typename T>
 void BinarySearchTree<T>::PrintTree(ostream &out)const
 {
-	cout << "[InOrder]" << endl;
+	//cout << "[InOrder]" << endl;
 	PrintInOrderTraversal(root, out);			// InOrder 방법으로 출력
 	//cout << endl << "[PreOrder]" << endl;
 	//PrintPreOrderTraversal(root, out);			// PreOrder 방법으로 출력
@@ -347,21 +333,6 @@ void Replace(Node<T> *&root, T& item)
 		root->data = item;					// item에 노드 정보를 복사
 }
 
-template<typename T>
-void RetrieveString(Node<T> *root, string data)
-{
-	if (root != NULL)								// root가 존재하는 경우
-	{
-		RetrieveString(root->left, data);
-		if (root->data == data)
-		{
-			cout << root->data;
-			cout << "------------------------------------------" << endl;
-		}
-		RetrieveString(root->right, data);
-	}
-}
-
 // InOrder 방법으로 출력하는 함수 
 template<typename T>
 void PrintInOrderTraversal(Node<T>* root, ostream& out)
@@ -370,7 +341,7 @@ void PrintInOrderTraversal(Node<T>* root, ostream& out)
 	{
 		PrintInOrderTraversal(root->left, out);		// root의 왼쪽으로 가서 다시 InOrder 함수 호출
 		out << root->data;							// root 출력
-		cout << endl;
+		cout << "──────────────────────────────────────────" << endl;
 		PrintInOrderTraversal(root->right, out);	// root의 오른쪽으로 가서 다시 InOrder 함수 호출
 	}
 }

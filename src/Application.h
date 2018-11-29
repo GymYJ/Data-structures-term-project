@@ -6,6 +6,13 @@
 #include <fstream>
 #include <cstring>
 #include <string>
+#include <Windows.h>
+#include <mmsystem.h>
+#include <conio.h>
+#include <io.h>
+
+#pragma comment(lib, "winmm.lib")
+#define dir "C:\\Users\\Yujin\\Music\\음악\\"
 using namespace std;
 
 #include "MusicType.h"
@@ -56,14 +63,6 @@ public:
 	void UserMode();
 
 	/**
-	*	@brief	명령어를 화면에 출력하고 키보드로 입력 받음
-	*	@pre	none.
-	*	@post	none.
-	*	@return	사용자가 입력한 명령어
-	*/
-	int GetCommand();
-
-	/**
 	*	@brief	리스트에 새로운 Music 추가
 	*	@pre	리스트가 초기화 되어있어야 됨
 	*	@post	리스트에 새로운 Music 추가
@@ -92,13 +91,13 @@ public:
 	*	@pre	재생목록이 초기화 되어있어야 됨
 	*	@return	재생 했으면 1, 없어서 못했으면 0 리턴
 	*/
-	int playMusic(string inSong, string inArtist);
+	int playMusic(string inSong);
 
 	/**
 	*	@brief	재생목록에 Music 하나 추가
 	*	@return	추가 했으면 1, 못했으면 0 리턴
 	*/
-	int AddMusicToPlayList(string inSong, string inArtist);
+	int AddMusicToPlayList(string inSong);
 
 	/**
 	*	@brief	재생목록에서 Music 하나 삭제

@@ -132,9 +132,9 @@ public:
 	}
 
 private:
-	string genre;
-	int m_Length;
-	BinarySearchTree<SimpleMusicType> m_List;
+	string genre;	///< Àå¸£¸í(primary key)
+	int m_Length;	///< ¼ÓÇÑ °î¼ö
+	BinarySearchTree<SimpleMusicType> m_List;	///< ¼ÓÇÑ °î
 };
 
 #endif	// _GenreType_H

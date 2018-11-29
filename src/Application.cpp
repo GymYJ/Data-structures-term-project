@@ -50,56 +50,6 @@ void Application::Run()
 			break;
 		}
 	}
-	while (1)
-	{
-		m_Command = GetCommand();
-
-		switch (m_Command)
-		{
-		case 1:	// 음악 추가 – 정렬
-			AddMusic();
-			break;
-		case 2:	// 리스트에서 음악 삭제
-			DeleteMusic();
-			break;
-		case 3:	// 리스트에 있는 음악 갱신 – 딜리트하고 애드
-			ReplaceMusic();
-			break;
-		case 4:	// 리스트에 있는 음악 검색
-				// 단, 검색어가 곡명에 포함된다면 출력한다
-				// 	ex) 검색어 : ‘사랑’ / 출력 : 가난한사랑,천년의사랑,..
-			SearchByName(); // find()함수
-			break;
-		case 5:	// 리스트에 있는 가수 검색
-				// 단, 검색어가 가수명에 포함된다면 출력한다
-			SearchByArtist();
-			break;
-		case 6:	// 리스트에 있는 앨범 검색
-				// 단, 검색어가 앨범명에 포함된다면 출력한다
-			SearchByAlbum();
-			break;
-		case 7:	// 리스트에 있는 장르 검색
-				// 단, 검색어가 장르명에 포함된다면 출력한다
-			SearchByGenre();
-			break;
-		case 8:	// 리스트에 있는 모든 음악정보 출력
-			DisplayAllMusic();
-			break;
-		case 9:	// 장르별로 음악 출력
-			ReadDataFromFile();
-			break;
-		case 10:	// 곡명과 장르가 일치하는 음악을 찾아서 화면에 출력
-			WriteDataToFile();
-			break;
-		case 0:
-			return;
-		default:
-			cout << "\tIllegal selection...\n";
-			break;
-
-
-		}
-	}
 }
 
 // 마스터계정 모드
@@ -123,7 +73,7 @@ void Application::MasterMode()
 		try
 		{
 			num = stoi(input); // 숫자 이외의 값이 들어가면 오류
-			if (num <= -1 || num >= 12)
+			if (num <= -1 || num >= 7)
 			{
 				throw invalid_argument("숫자 범위 오류");
 			}
@@ -205,7 +155,7 @@ void Application::UserMode()
 		try
 		{
 			num = stoi(input); // 숫자 이외의 값이 들어가면 오류
-			if (num <= -1 || num >= 12)
+			if (num <= -1 || num >= 7)
 			{
 				throw invalid_argument("숫자 범위 오류");
 			}
@@ -266,32 +216,6 @@ void Application::UserMode()
 	}
 }
 
-// 명령어를 스크린에 보여주고 키보드로 입력받음
-int Application::GetCommand()
-{
-	int command;
-	cout << endl << endl;
-	cout << "\t---ID -- Command ----- " << endl;
-	cout << "\t   1 : Add Music" << endl;
-	cout << "\t   2 : Delete Music" << endl;
-	cout << "\t   3 : Replace Music" << endl;
-	cout << "\t   4 : Search by name" << endl;
-	cout << "\t   5 : Search by artist" << endl;
-	cout << "\t   6 : Search by album" << endl;
-	cout << "\t   7 : Search by genre" << endl;
-	cout << "\t   8 : Display all music" << endl;
-	cout << "\t   9 : Read data from file" << endl;
-	cout << "\t   10 : Write data from file" << endl;
-	cout << "\t   0 : Quit" << endl;
-
-	cout << endl << "\t Choose a Command--> ";
-	cin >> command;
-	cout << endl;
-
-	return command;
-}
-
-
 // 리스트에 새로운 Music 추가
 int Application::AddMusic()
 {
@@ -303,11 +227,6 @@ int Application::AddMusic()
 
 	cout << "추가할 곡의 정보를 입력해 주세요." << endl;
 	music.SetRecordFromKB();
-	simplemusic.SetRecord(music.GetSong(), music.GetSinger());
-	genre.SetGenre(music.GetGenre());
-	artist.SetRecord(music.GetSinger());
-	album.SetRecord(music.GetSinger(), music.GetAlbum());
-
 	bool Found;
 	m_List.RetrieveItem(music, Found);
 	if (Found == true)
@@ -315,6 +234,27 @@ int Application::AddMusic()
 		cout << "같은 음악이 존재합니다." << endl;
 		return 0;
 	}
+
+	string filename;
+	filename = dir + music.GetSong() + ".wav";
+	char* file;
+	file = (char*)filename.c_str();
+	file[filename.size()] = '\0';
+
+	_finddata_t find;
+	long handle;
+	handle = _findfirst(file, &find);
+	if (handle == -1)
+	{
+		cout << "폴더에 파일이 없습니다." << endl;
+		return 0;
+	}
+
+	simplemusic.SetRecord(music.GetSong(), music.GetSinger());
+	genre.SetGenre(music.GetGenre());
+	artist.SetRecord(music.GetSinger());
+	album.SetRecord(music.GetSinger(), music.GetAlbum());
+
 
 	// MusicList에 추가
 	m_List.Add(music);
@@ -358,9 +298,8 @@ int Application::DeleteMusic()
 	ArtistType artist;
 	AlbumType album;
 
-	cout << "삭제할 곡의 곡명과 가수를 입력해주세요." << endl;
+	cout << "삭제할 곡의 곡명을 입력해주세요." << endl;
 	music.SetSongFromKB();
-	music.SetSingerFromKB();
 
 	bool Found;
 	m_List.RetrieveItem(music, Found);
@@ -410,9 +349,8 @@ int Application::ReplaceMusic()
 
 	// 노래삭제
 	{
-		cout << "갱신할 곡의 곡명과 가수를 입력해주세요." << endl;
+		cout << "갱신할 곡의 곡명을 입력해주세요." << endl;
 		music.SetSongFromKB();
-		music.SetSingerFromKB();
 
 		bool Found;
 		m_List.RetrieveItem(music, Found);
@@ -452,11 +390,6 @@ int Application::ReplaceMusic()
 	{
 		cout << "갱신할 곡의 정보를 입력해 주세요." << endl;
 		music.SetRecordFromKB();
-		simplemusic.SetRecord(music.GetSong(), music.GetSinger());
-		genre.SetGenre(music.GetGenre());
-		artist.SetRecord(music.GetSinger());
-		album.SetRecord(music.GetSinger(), music.GetAlbum());
-
 		bool Found;
 		m_List.RetrieveItem(music, Found);
 		if (Found == true)
@@ -464,6 +397,26 @@ int Application::ReplaceMusic()
 			cout << "같은 음악이 존재합니다." << endl;
 			return 0;
 		}
+
+		string filename;
+		filename = dir + music.GetSong() + ".wav";
+		char* file;
+		file = (char*)filename.c_str();
+		file[filename.size()] = '\0';
+
+		_finddata_t find;
+		long handle;
+		handle = _findfirst(file, &find);
+		if (handle == -1)
+		{
+			cout << "폴더에 파일이 없습니다." << endl;
+			return 0;
+		}
+		
+		simplemusic.SetRecord(music.GetSong(), music.GetSinger());
+		genre.SetGenre(music.GetGenre());
+		artist.SetRecord(music.GetSinger());
+		album.SetRecord(music.GetSinger(), music.GetAlbum());
 
 		// MusicList에 추가
 		m_List.Add(music);
@@ -498,13 +451,13 @@ int Application::ReplaceMusic()
 }
 
 
-int Application::playMusic(string inSong, string inArtist)
+int Application::playMusic(string inSong)
 {
 	
 	return 1;
 }
 
-int Application::AddMusicToPlayList(string inSong, string inArtist)
+int Application::AddMusicToPlayList(string inSong)
 {
 	
 	return 1;
@@ -519,12 +472,31 @@ int Application::deleteMusicFromPlayList()
 // 리스트에서 제목이 일치하는 Music 모두 출력
 int Application::SearchByName()
 {
-	string song;
+	MusicType music;
+	bool found;
 	cout << "찾을 곡의 곡명을 입력하세요" << endl << "\tSong   : ";
-	cin >> song;
-	cout << "------------------------------------------" << endl;
+	music.SetSongFromKB();
+	cout << "──────────────────────────────────────────" << endl;
 
-	m_List.RetrieveByString(song);
+	m_List.RetrieveItem(music, found);
+	if (found == false)
+	{
+		cout << "일치하는 곡이 없습니다." << endl;
+		return 0;
+	}
+	else
+	{
+		music.DisplayRecordOnScreen();
+		cout << "플레이리스트에 추가하시겠습니까? (Y/N)" << endl;
+		string input;
+		cin >> input;
+		if (input == "Y")
+		{
+			AddMusicToPlayList(music.GetSong());
+			cout << "추가되었습니다." << endl;
+		}
+	}
+
 	return 1;
 }
 
@@ -537,38 +509,89 @@ int Application::SearchByArtist()
 	cin >> data;
 	artist.SetArtistName(data);
 
+	cout << "──────────────────────────────────────────" << endl;
 	bool FoundFromArtist;
 	m_ArtistList.RetrieveItem(artist, FoundFromArtist);
-	cout << "------------------------------------------" << endl;
-	artist.DisplaySongListOnScreen();
-
+	if (FoundFromArtist == false)
+	{
+		cout << "일치하는 가수가 없습니다." << endl;
+		return 0;
+	}
+	else
+	{
+		artist.DisplaySongListOnScreen();
+		cout << "──────────────────────────────────────────" << endl;
+		MusicType music;
+		bool found;
+		cout << "자세히 보고 싶은 곡명을 입력하세요" << endl;
+		music.SetSongFromKB();
+		cout << "──────────────────────────────────────────" << endl;
+		m_List.RetrieveItem(music, found);
+		if (found == false)
+		{
+			cout << "일치하는 곡이 없습니다." << endl;
+			return 0;
+		}
+		else
+		{
+			music.DisplayRecordOnScreen();
+			cout << "플레이리스트에 추가하시겠습니까? (Y/N)" << endl;
+			string input;
+			cin >> input;
+			if (input == "Y")
+			{
+				AddMusicToPlayList(music.GetSong());
+				cout << "추가되었습니다." << endl;
+			}
+		}
+	}
 	return 1;
 }
 
 //  리스트에서 앨범이 일치하는 앨범 모두 출력
 int Application::SearchByAlbum()
 {
-	string album;
+	AlbumType album;
+	string data;
 	cout << "찾을 곡의 앨범명을 입력하세요" << endl << "\tAlbum   : ";
-	cin >> album;
-	cout << "------------------------------------------" << endl;
-
-	m_AlbumList.RetrieveByString(album);
-
-	cout << "자세히 보고 싶은 앨범의 가수명과 앨범명을 입력해주세요" << endl;
-	AlbumType temp;
-	string singer;
-	cout << "\tArtist   : ";
-	cin >> singer;
-	cout << "\tAlbum   : ";
-	cin >> album;
-	cout << "------------------------------------------" << endl;
-	temp.SetRecord(singer, album);
+	cin >> data;
+	cout << "──────────────────────────────────────────" << endl;
 
 	bool FoundFromAlbum;
-	m_AlbumList.RetrieveItem(temp, FoundFromAlbum);
-	temp.DisplayContainMusicListOnScreen();
-
+	m_AlbumList.RetrieveItem(album, FoundFromAlbum);
+	if (FoundFromAlbum == false)
+	{
+		cout << "일치하는 앨범이 없습니다." << endl;
+		return 0;
+	}
+	else
+	{
+		album.DisplayContainMusicListOnScreen();
+		cout << "──────────────────────────────────────────" << endl;
+		MusicType music;
+		bool found;
+		cout << "자세히 보고 싶은 곡명을 입력하세요" << endl;
+		music.SetSongFromKB();
+		cout << "──────────────────────────────────────────" << endl;
+		m_List.RetrieveItem(music, found);
+		if (found == false)
+		{
+			cout << "일치하는 곡이 없습니다." << endl;
+			return 0;
+		}
+		else
+		{
+			music.DisplayRecordOnScreen();
+			cout << "플레이리스트에 추가하시겠습니까? (Y/N)" << endl;
+			string input;
+			cin >> input;
+			if (input == "Y")
+			{
+				AddMusicToPlayList(music.GetSong());
+				cout << "추가되었습니다." << endl;
+			}
+		}
+	}
 	return 1;
 }
 
@@ -580,11 +603,43 @@ int Application::SearchByGenre()
 	cout << "찾을 곡의 장르명을 입력하세요" << endl << "\tGenre   : ";
 	cin >> data;
 	genre.SetGenre(data);
-	cout << "------------------------------------------" << endl;
+	cout << "──────────────────────────────────────────" << endl;
 
 	bool FoundFromGenre;
 	m_GenreList.RetrieveItem(genre, FoundFromGenre);
-	genre.DisplayListOnScreen();
+	if (FoundFromGenre == false)
+	{
+		cout << "일치하는 장르가 없습니다." << endl;
+		return 0;
+	}
+	else
+	{
+		genre.DisplayListOnScreen();
+		cout << "──────────────────────────────────────────" << endl;
+		MusicType music;
+		bool found;
+		cout << "자세히 보고 싶은 곡명을 입력하세요" << endl;
+		music.SetSongFromKB();
+		cout << "──────────────────────────────────────────" << endl;
+		m_List.RetrieveItem(music, found);
+		if (found == false)
+		{
+			cout << "일치하는 곡이 없습니다." << endl;
+			return 0;
+		}
+		else
+		{
+			music.DisplayRecordOnScreen();
+			cout << "플레이리스트에 추가하시겠습니까? (Y/N)" << endl;
+			string input;
+			cin >> input;
+			if (input == "Y")
+			{
+				AddMusicToPlayList(music.GetSong());
+				cout << "추가되었습니다." << endl;
+			}
+		}
+	}
 
 	return 1;
 }
@@ -628,7 +683,7 @@ void Application::DisplayPlayList()
 		return;
 	}
 
-	playMusic(m_PlayList[num - 1].GetSong(), m_PlayList[num - 1].GetSinger());
+	playMusic(m_PlayList[num - 1].GetSong());
 
 	return;
 }
