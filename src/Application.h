@@ -212,7 +212,6 @@ private:
 	ifstream m_InFile;		///< input file descriptor.
 	ofstream m_OutFile;		///< output file descriptor.
 	BinarySearchTree<MusicType> m_SongList;	///< Master list
-	BinarySearchTree<SimpleMusicType> m_SimpleList; ///< Song list.
 	BinarySearchTree<GenreType> m_GenreList; ///< Genre list.
 	BinarySearchTree<ArtistType> m_ArtistList; ///< Artist list.
 	BinarySearchTree<AlbumType> m_AlbumList; ///< Album list.
