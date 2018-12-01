@@ -36,7 +36,7 @@ Debug
 Release
 x64
 
-
+# Doxygen files
 
 # vs other files
 .vs
