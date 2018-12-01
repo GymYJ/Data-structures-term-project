@@ -6,7 +6,6 @@
 *	@author	장유진
 */
 
-
 #include "Application.h"
 /**
 *	자료구조 프로젝트2 메인 함수
