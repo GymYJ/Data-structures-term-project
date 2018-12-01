@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['searchbyalbum',['SearchByAlbum',['../class_application.html#aac64ff9893f17de4bc135868ee86f43c',1,'Application']]],
+  ['searchbyartist',['SearchByArtist',['../class_application.html#a9be4df1941ddb82f4fb05292d1d738aa',1,'Application']]],
+  ['searchbygenre',['SearchByGenre',['../class_application.html#a364a1b01c35613bc996b617b7421725c',1,'Application']]],
+  ['searchbyname',['SearchByName',['../class_application.html#abc446d28c04ec43a8b6a6335470fd9ab',1,'Application']]],
+  ['setalbum',['SetAlbum',['../class_music_type.html#a87604622f255036c86e7b963c5562e78',1,'MusicType']]],
+  ['setalbumfromkb',['SetAlbumFromKB',['../class_music_type.html#a61e2047e2455848b8c50ac5307efa243',1,'MusicType']]],
+  ['setalbumname',['SetAlbumName',['../class_album_type.html#afe55bf0bc0e017767c5d12b6864c74e4',1,'AlbumType']]],
+  ['setartistname',['SetArtistName',['../class_album_type.html#a7aa4b9f39bbeb024baaaa8bf4b40d9e7',1,'AlbumType::SetArtistName()'],['../class_artist_type.html#a45886bd19f23e434caad523845a2ded3',1,'ArtistType::SetArtistName()']]],
+  ['setgenre',['SetGenre',['../class_genre_type.html#aff2f6e4385ba3ea03c7c16e4c30ffc4d',1,'GenreType::SetGenre()'],['../class_music_type.html#aaa9428c138bc739ce16971ebb72c0b24',1,'MusicType::SetGenre()']]],
+  ['setgenrefromkb',['SetGenreFromKB',['../class_music_type.html#aaf90fff6e40fc7cf15a4940556829192',1,'MusicType']]],
+  ['setlyrics',['SetLyrics',['../class_music_type.html#aac34dce42c4d6c7e802712eb4526d279',1,'MusicType']]],
+  ['setlyricsfromkb',['SetLyricsFromKB',['../class_music_type.html#a08b5730c5a55954a8ce14919e39db9e3',1,'MusicType']]],
+  ['setlyricwriter',['SetLyricWriter',['../class_music_type.html#a0f6272ec51b2a855490ed9cca6ad3544',1,'MusicType']]],
+  ['setlyricwriterfromkb',['SetLyricWriterFromKB',['../class_music_type.html#a73e8b699a70d4a9b5ec4523f526e7b3b',1,'MusicType']]],
+  ['setrecord',['SetRecord',['../class_album_type.html#a5bbebd1751ffffc71a2bd45f0232f7a6',1,'AlbumType::SetRecord()'],['../class_artist_type.html#af775a948b522722653f4aa4ced46870a',1,'ArtistType::SetRecord()'],['../class_music_type.html#a58c2db5f224d048bee06ef86bf7e2e9e',1,'MusicType::SetRecord()'],['../class_simple_music_type.html#a0043ba96aa7b5a5c00654685abc56657',1,'SimpleMusicType::SetRecord()']]],
+  ['setrecordfromkb',['SetRecordFromKB',['../class_music_type.html#a5a88e9897e64dbb2ee483761b1723a7f',1,'MusicType']]],
+  ['setsinger',['SetSinger',['../class_music_type.html#a6cde15eb569386fc2c4304d3f3d19a63',1,'MusicType::SetSinger()'],['../class_simple_music_type.html#a756c92b3841baf059a55d8c064b4dc8d',1,'SimpleMusicType::SetSinger()']]],
+  ['setsingerfromkb',['SetSingerFromKB',['../class_music_type.html#a8211978b66e0052338cb2150ecc641b2',1,'MusicType']]],
+  ['setsong',['SetSong',['../class_music_type.html#a1430a4aca62e370876f986acf8bbe716',1,'MusicType::SetSong()'],['../class_simple_music_type.html#aff99e2d57f9faca317fff00387120123',1,'SimpleMusicType::SetSong()']]],
+  ['setsongfromkb',['SetSongFromKB',['../class_music_type.html#a3d15e234e6ed6a974c91909091cea5a9',1,'MusicType']]],
+  ['setsongwriter',['SetSongWriter',['../class_music_type.html#aa38d796ac2d3eb7eeaaf06194120627a',1,'MusicType']]],
+  ['setsongwriterfromkb',['SetSongWriterFromKB',['../class_music_type.html#ae98768014732f72cbb2a7a215dca6d65',1,'MusicType']]]
+];
